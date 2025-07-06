@@ -9,6 +9,7 @@ export const listProduct = async (count) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -18,6 +19,7 @@ export const filters = async (data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -36,6 +38,7 @@ export const createProduct = async (token, data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -53,6 +56,7 @@ export const editProduct = async (token, id, data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -69,6 +73,7 @@ export const deleteProduct = async (token, id) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -79,6 +84,7 @@ export const upload = async (data) => {
     return;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -95,5 +101,6 @@ export const deleteProductImageBy = async (token, id, nameImage) => {
     );
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };

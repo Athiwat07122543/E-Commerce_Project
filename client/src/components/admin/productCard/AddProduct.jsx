@@ -3,10 +3,10 @@ import { listCategory } from "../../../api/Category";
 import { createProduct } from "../../../api/Product";
 import { MdOutlineSaveAs } from "react-icons/md";
 import { toast } from "react-toastify";
-import useStore from "../../../store/useStore"
+import useStore from "../../../store/useStore";
 
 const AddProduct = ({ onClose, getData }) => {
-  const token = useStore((state) => state.token)
+  const token = useStore((state) => state.token);
   const [dropdown, setDropdown] = useState(false);
   const [category, setCategory] = useState({});
   const [addCategory, setAddCategory] = useState({ id: null, name: null });
@@ -36,6 +36,20 @@ const AddProduct = ({ onClose, getData }) => {
 
   const addProduct = async () => {
     try {
+      if (dataProduct.name == null) {
+        return toast.warning("กรุณาใส่ชื่อสินค้า");
+      } else if (dataProduct.description == null) {
+        return toast.warning("กรุณาใส่รายละเอียดสินค้า");
+      } else if (dataProduct.quantity == null) {
+        return toast.warning("กรุณาใส่จำนวนสินค้า");
+      } else if (dataProduct.sold == null) {
+        return toast.warning("กรุณาใส่จำนวนยอดขายสินค้า");
+      } else if (dataProduct.price == null) {
+        return toast.warning("กรุณาใส่ราคาขาย");
+      } else if (dataProduct.categoryId == null) {
+        return toast.warning("กรุณาเลือกหมวดหมู่สินค้า");
+      }
+
       const formData = new FormData();
       formData.append("name", dataProduct.name);
       formData.append("description", dataProduct.description);
@@ -43,12 +57,11 @@ const AddProduct = ({ onClose, getData }) => {
       formData.append("sold", dataProduct.sold);
       formData.append("price", dataProduct.price);
       formData.append("categoryId", dataProduct.categoryId);
-
       image.forEach((img) => {
-        formData.append("images",img);
-      })
-
-      const res = await createProduct(token,formData);
+        formData.append("images", img);
+      });
+      const res = await createProduct(token, formData);
+      onClose();
       toast.success("สร้างสินค้าเสร็จเรียบร้อย");
     } catch (err) {
       console.log(err);
@@ -61,7 +74,9 @@ const AddProduct = ({ onClose, getData }) => {
       <div className="bg-white shadow-lg w-[500px] rounded-2xl">
         <div className="flex justify-between items-center bg-blue-500 text-white px-4 py-2 font-semibold rounded-t-2xl">
           <span>เพิ่มสินค้า</span>
-          <button onClick={onClose}>X</button>
+          <button className="hover:cursor-pointer" onClick={onClose}>
+            X
+          </button>
         </div>
 
         <div className="px-4 py-4 space-y-4">
@@ -89,6 +104,7 @@ const AddProduct = ({ onClose, getData }) => {
             <div className="w-full">
               <label>จำนวน</label>
               <input
+                type="number"
                 className="border w-full  h-[40px] px-1 rounded-md"
                 onChange={(e) =>
                   setDataProduct({ ...dataProduct, quantity: e.target.value })
@@ -98,6 +114,7 @@ const AddProduct = ({ onClose, getData }) => {
             <div className="w-full">
               <label>จำนวนที่ขาย</label>
               <input
+                type="number"
                 className="border w-full h-[40px] px-1 rounded-md"
                 onChange={(e) =>
                   setDataProduct({ ...dataProduct, sold: e.target.value })
@@ -110,6 +127,7 @@ const AddProduct = ({ onClose, getData }) => {
               <label>ราคา</label>
               <p>
                 <input
+                  type="number"
                   className="border w-full h-[40px] px-1 rounded-md"
                   onChange={(e) =>
                     setDataProduct({ ...dataProduct, price: e.target.value })
@@ -154,20 +172,21 @@ const AddProduct = ({ onClose, getData }) => {
             </div>
           </div>
           <div>
-            <label className="">อัพโหลดรูปภาพ</label>
+            <div>อัพโหลดรูปภาพ</div>
             <input
+              className="hover:cursor-pointer"
               type="file"
               multiple
               onChange={(e) => setImage(Array.from(e.target.files))}
-            ></input>
+            />
           </div>
           <button
-            className="px-2 border rounded-md py-2"
+            className="px-2 rounded-md hover:cursor-pointer"
             onClick={async () => {
-              await addProduct(), onClose(), getData();
+              await addProduct(), getData();
             }}
           >
-            <MdOutlineSaveAs />
+            <MdOutlineSaveAs size={34} />
           </button>
         </div>
       </div>

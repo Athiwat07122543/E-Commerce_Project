@@ -3,6 +3,7 @@ import useStore from "../../store/useStore";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import numeral from "numeral";
 
 const Cart = () => {
   const cart = useStore((state) => state.cart);
@@ -38,7 +39,6 @@ const Cart = () => {
   const handleRemoveCount = async (id) => {
     try {
       const result = await actionRemoveCountCart(id);
-      console.log("remove");
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +47,6 @@ const Cart = () => {
   const handleAddCount = async (id) => {
     try {
       const result = await actionAddCountCart(id);
-      console.log("add");
     } catch (err) {
       console.log(err);
     }
@@ -69,7 +68,9 @@ const Cart = () => {
                     src={`http://localhost:3000/uploads/${item.images[0].imageUrl}`}
                   />
                 ) : (
-                  <div className="w-[500px] h-[300px] p-4 text-center">NO image</div>
+                  <div className="flex w-[500px] h-[300px] items-center px-40">
+                    NO image
+                  </div>
                 )}
               </div>
               <div className="h-[250px] w-[600px] mt-10">
@@ -78,7 +79,7 @@ const Cart = () => {
                   <div className="flex gap-10">
                     <div className="text-2xl">ราคา</div>
                     <div className="text-2xl text-red-500 font-bold">
-                      {item.price}
+                      {numeral(item.price).format("0,0")}
                     </div>
                     <div className="text-2xl">บาท</div>
                   </div>
@@ -95,7 +96,7 @@ const Cart = () => {
                 <div className="flex mt-10">
                   <div className="font-bold text-2xl">ราคา</div>
                   <div className="font-bold text-4xl text-red-500 w-[150px] text-center">
-                    {item.price * item.count}
+                    {numeral(item.price * item.count).format("0,0")}
                   </div>
                   <div className="font-bold text-2xl">บาท</div>
                 </div>
@@ -106,7 +107,7 @@ const Cart = () => {
                   >
                     ลด
                   </button>
-                  <div className="font-bold text-2xl w-[50px] h-[40px] shadow text-center">
+                  <div className="font-bold text-2xl w-[50px] h-[40px] shadow text-center py-1">
                     {item.count}
                   </div>
                   <button
@@ -129,7 +130,7 @@ const Cart = () => {
         <div className="mt-4 ml-4 mr-4 h-[60px] flex gap-4 w-full">
           <div className="font-bold text-xl py-4">รวมยอดทั้งหมด</div>
           <div className="font-bold text-6xl text-red-500 h-[60px] w-[250px] text-center">
-            {getTotalPrice()}
+            {numeral(getTotalPrice()).format("0,0")}
           </div>
           <div className="font-bold text-xl py-4">บาท</div>
         </div>
@@ -137,7 +138,7 @@ const Cart = () => {
           {user ? (
             <button
               onClick={buttonPayment}
-              className="border border-gray-200 h-[40px] w-full text-center shadow-md"
+              className=" h-[40px] w-full text-center shadow-md bg-sky-400 hover:bg-sky-500 hover:cursor-pointer"
             >
               ชำระเงิน
             </button>
@@ -147,30 +148,6 @@ const Cart = () => {
             </button>
           )}
         </div>
-        {/* <div className="flex justify-between px-6 py-3 border">
-          <div className="font-bold text-xl">รวมยอดทั้งหมด</div>
-          <div className="font-bold text-6xl text-red-500 h-[60px]">
-            {getTotalPrice()}
-          </div>
-          <div className="font-bold text-xl">บาท</div>
-        </div>
-        <div className="mt-2">
-          {user ? (
-            <button
-              onClick={buttonPayment}
-              className="border border-gray-200 ml-2 mr-2 w-full"
-            >
-              ชำระเงิน
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="font-bold text-2xl px-6 ml-4 mr-4 mb-4 h-[50px] shadow-md bg-gray-200 text-center  flex  justify-center items-center hover:bg-gray-300"
-            >
-              เข้าสู่ระบบ
-            </Link>
-          )}
-        </div> */}
       </div>
     </div>
   );

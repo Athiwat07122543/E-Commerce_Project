@@ -89,6 +89,7 @@ const Order = () => {
                 <td className="border border-gray-300 p-2">{item.status}</td>
                 <td className="border border-gray-300 p-2">
                   <button
+                  className="hover:cursor-pointer"
                     onClick={() => {
                       setPopupUpdateOrder(true), setOrderBy(item);
                     }}
@@ -104,6 +105,7 @@ const Order = () => {
                 </td>
                 <td className="border border-gray-300 p-2">
                   <button
+                  className="hover:cursor-pointer"
                     onClick={() => {
                       setPopupDetailOrder(true), setOrderBy(item);
                     }}
@@ -124,7 +126,7 @@ const Order = () => {
       </div>
       <div className="mt-10 flex">
         <button
-          className="border mr-10 w-[80px] h-[40px] shadow-md rounded-md border-gray-300 hover:bg-gray-200"
+          className="border mr-10 w-[80px] h-[40px] shadow-md rounded-md border-gray-300 hover:bg-gray-200 hover:cursor-pointer"
           onClick={handlePervPage}
         >
           ย้อนกลับ
@@ -134,7 +136,7 @@ const Order = () => {
         </div>
         {page < totalPage ? (
           <button
-            className="border mr-10 w-[80px] h-[40px] shadow-md rounded-md border-gray-300 hover:bg-gray-200"
+            className="border mr-10 w-[80px] h-[40px] shadow-md rounded-md border-gray-300 hover:bg-gray-200 hover:cursor-pointer"
             onClick={handleNextPage}
           >
             ถัดไป

@@ -5,6 +5,7 @@ export const login = async (data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -14,6 +15,7 @@ export const register = async (data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -31,5 +33,6 @@ export const checkRole = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };

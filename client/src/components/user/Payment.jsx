@@ -6,9 +6,8 @@ import { checkOut } from "../../api/Stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-const stripePromise = loadStripe(
-  "pk_test_51RVPSOQ6qlMlWxcnx1S4D6SOuwHqpSv6qE7jHbq2GmOm4jkmMx0FY7tvbOGXiIUO3ds4Q2m8zqk8vJDLKOzvXxag00tccbutMY"
-);
+import numeral from "numeral";
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ const Payment = () => {
     });
   };
 
-
   useEffect(() => {
     listAddress();
   }, []);
@@ -49,7 +47,6 @@ const Payment = () => {
         product: cart,
       };
       const res = await checkOut(token, data);
-      console.log(res.data);
       if (res.data.success === false) {
         if (res.data.error === "PRODUCT_DONT_MATCH_QUANTITY") {
           toast.warning(res.data.message);
@@ -73,88 +70,94 @@ const Payment = () => {
       console.log(err);
     }
   };
-  return (
-    <div className="p-4 flex justify-between ">
-      <div className="w-full ml-4 mr-4 h-[400px] flex shadow-md border-md border-gray-200">
-        <div className="m-2 w-[400px] border border-gray-200 shadow-md h-[100px] p-4">
-          <div className="flex justify-between">
-            <div>
-              ชื่อผู้รับ: {address.recipientName}, เบอร์โทรศัพทิ์:
-              {address.phone}
-            </div>
-          </div>
-          <label>ที่อยู่: {address.addressDetail}</label>
-        </div>
-        <div>
-          <button
-            className="bg-sky-400 shadow-2xl mt-2 h-[50px] w-[120px]"
-            onClick={() => setPopupChangeAddress(true)}
-          >
-            เปลื่ยนที่จัดส่ง
-          </button>
-        </div>
-      </div>
-      <div className="w-1/2 mr-4">
-        <div className="flex gap-8 p-4">
-          <div className="text-3xl">ราคารวม</div>
-          <div className="text-4xl font-bold text-red-500">
-            {getTotalPrice()}
-          </div>
-          <div className="text-3xl">บาท</div>
-        </div>
-        <div>
-          {cart.map((item, index) => (
-            <div
-              className="flex mb-4 border  border-gray-200 p-2 shadow-md justify-between"
-              key={index}
-            >
-              <div className="flex">
-                {item.images && item.images.length > 0 && item.images[0] ? (
-                  <img
-                    className="w-[200px] h-[200px] p-4"
-                    src={`http://localhost:3000/uploads/${item.images[0].imageUrl}`}
-                  />
-                ) : (
-                  <div className="w-[200px] h-[200px] p-4">NO image</div>
-                )}
 
-                <div className="ml-4">
-                  <div className="font-bold">{item.name}</div>
-                  <div className="flex gap-2 mt-2">
-                    <div>{item.count}</div>
-                    <div>x</div>
-                    <div>{item.price}</div>
-                    <div className="flex gap-2"></div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="flex gap-2 items-center mr-2">
-                  <div className="text-xl ">ราคา</div>
-                  <div className="font-bold text-2xl text-red-500">
-                    <div> {item.count * item.price}</div>
-                  </div>
-                  <div className="text-xl ">บาท</div>
-                </div>
+  return (
+    <div className="p-4 flex justify-between">
+      <div className="w-7/10">
+        <div className="h-[360px] ml-8 mt-8 mr-4 shadow-2xl border border-gray-100">
+          <div className="ml-8 mt-8 mr-8  bg-sky-500 text-white w-[140px] h-[50px] items-center text-center py-2 shadow-md hover:bg-sky-600 hover:cursor-pointer text-xl">
+            <button onClick={() => setPopupChangeAddress(true)}>
+              เปลื่ยนที่จัดส่ง
+            </button>
+          </div>
+          <div className="flex ml-8 mt-4 mr-8 space-x-10">
+            <div className="h-[100px]">
+              <div className="text-2xl">ชื่อผู้รับ</div>
+              <div className="text-2xl mt-2 border border-gray-100 h-[40px] px-4 w-[400px] bg-gray-100 rounded-xl">
+                {address.recipientName || null}
               </div>
             </div>
-          ))}
+            <div className="h-[100px]">
+              <div className="text-2xl">เบอร์โทรศัพท์</div>
+              <div className="text-2xl mt-2 border border-gray-100 h-[40px] px-4 w-[400px] bg-gray-100 rounded-xl">
+                {address.phone || null}
+              </div>
+            </div>
+          </div>
+          <div className="h-[100px] ml-8 mt-4 mr-8">
+            <div className="text-2xl">ที่อยู่จัดส่ง</div>
+            <div className="text-2xl mt-2 border border-gray-100 h-[40px] px-4 w-full bg-gray-100 rounded-xl">
+              {address.addressDetail || null}
+            </div>
+          </div>
         </div>
-        <div>
+        {popupAddAddress && (
+          <AddAddress getClose={() => setPopupAddAddress(false)} />
+        )}
+        {popupChangeAddress && (
+          <ChangeAddress getClose={() => setPopupChangeAddress(false)} />
+        )}
+        <div className="flex justify-end mt-4 pr-8">
           <button
             onClick={handleCheckOut}
-            className="hover:cursor-pointer h-[40px]  w-[80px] border"
+            className="hover:cursor-pointer h-[40px] w-[100px] bg-green-500 text-white shadow hover:bg-green-700 text-xl rounded"
           >
             ชำระเงิน
           </button>
         </div>
       </div>
-      {popupAddAddress && (
-        <AddAddress getClose={() => setPopupAddAddress(false)} />
-      )}
-      {popupChangeAddress && (
-        <ChangeAddress getClose={() => setPopupChangeAddress(false)} />
-      )}
+
+      <div className="w-3/10 ml-4 mt-8 mr-8 shadow-2xl border border-gray-100">
+        <div className="h-[60px] flex mt-4">
+          <div className="text-3xl w-1/3 text-center">ราคารวม</div>
+          <div className="text-4xl font-bold text-red-500 w-1/3 text-center">
+            {numeral(getTotalPrice()).format("0,0")}
+          </div>
+          <div className="text-3xl w-1/3 text-center">บาท</div>
+        </div>
+        <div className="m-2">
+          {cart.map((item, index) => (
+            <div
+              className="h-[200px] flex mb-4 border border-gray-200 shadow-md"
+              key={index}
+            >
+              <div className="w-1/2">
+                {item.images && item.images.length > 0 && item.images[0] ? (
+                  <img
+                    className="w-[240px] h-[180px]"
+                    src={`http://localhost:3000/uploads/${item.images[0].imageUrl}`}
+                  />
+                ) : (
+                  <div className="w-[240px] h-[180px] flex items-center px-16">
+                    NO image
+                  </div>
+                )}
+              </div>
+              <div className="w-1/2 m-2 space-y-2">
+                <div className="font-bold text-2xl">{item.name}</div>
+                <div className="text-xl">จำนวน: {item.count} ชิ้น</div>
+                <div className="flex">
+                  <div className="w-1/3 text-xl">ราคา</div>
+                  <div className="w-1/3 text-xl text-red-500 font-bold">
+                    {numeral(item.price).format("0,0")}
+                  </div>
+                  <div className="w-1/3 text-xl text-center">บาท</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

@@ -14,11 +14,11 @@ exports.listUser = async (req, res) => {
       },
     });
 
-    res.json(data);
+    res.status(200).json(data);
   } catch (err) {
     console.log(err);
     res
-      .status(401)
+      .status(500)
       .json({ error: "LIST_USER_ERROR", message: "ListUser ทำงานผิดพลาด" });
   }
 };

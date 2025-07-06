@@ -10,6 +10,7 @@ export const addAddress = async (token, form) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -23,6 +24,7 @@ export const getAddress = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -40,6 +42,7 @@ export const changeAddressId = async (token, addressId) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -57,6 +60,7 @@ export const addCart = async (token, productId) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -74,6 +78,7 @@ export const reduceCart = async (token, productId) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -87,6 +92,7 @@ export const getCart = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 export const updateStock = async (token) => {
@@ -103,6 +109,7 @@ export const updateStock = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -116,6 +123,7 @@ export const clearCart = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -129,5 +137,6 @@ export const getOrderBy = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };

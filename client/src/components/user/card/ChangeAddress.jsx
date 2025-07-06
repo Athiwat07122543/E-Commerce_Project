@@ -132,7 +132,7 @@ const ChangeAddress = ({ getClose }) => {
                 ))}
               </>
             ) : (
-              <div className="p-4">ไม่มีที่อยู่จัดส่ง</div>
+              <div className="p-4 text-xl">ไม่มีข้อมูลที่อยู่จัดส่ง</div>
             )}
           </div>
         </div>

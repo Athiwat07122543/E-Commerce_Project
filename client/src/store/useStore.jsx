@@ -128,12 +128,12 @@ const useStore = create(
                 if (item.count > 1) {
                   return { ...item, count: item.count - 1 };
                 } else {
-                  return null; // ถ้า count = 1 → ให้เป็นค่า null
+                  return null;
                 }
               }
               return item;
             })
-            .filter(Boolean); // ถ้าเป็นค่า null ให้ลบข้อมูลออกจาก Cart
+            .filter(Boolean);
           return { cart: updateCart };
         });
       },
@@ -145,6 +145,7 @@ const useStore = create(
               if (item.id === id) {
                 return { ...item, count: item.count + 1 };
               }
+              return item;
             });
             return { cart: updateCart };
           });

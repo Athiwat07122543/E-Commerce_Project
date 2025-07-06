@@ -10,6 +10,7 @@ export const listUser = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -27,6 +28,7 @@ export const editUser = async (token, id, data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -45,6 +47,7 @@ export const getOrders = async (token, page, limit, status) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -58,6 +61,7 @@ export const updateOrder = async (token, order) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -71,6 +75,7 @@ export const ordersToDay = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -84,6 +89,7 @@ export const getOrdersMonthlySales = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -97,5 +103,6 @@ export const getTotalSalesToDay = async (token) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };

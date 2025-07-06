@@ -10,6 +10,6 @@ export const checkOut = async (token, data) => {
     return res;
   } catch (err) {
     console.log(err);
-    return null;
+    return err.response;
   }
 };

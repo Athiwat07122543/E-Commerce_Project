@@ -81,7 +81,7 @@ const EditProduct = ({ onClose, data, getData }) => {
       <div className="bg-white  shadow-md w-[1000px] rounded-2xl">
         <div className="flex justify-between items-center bg-sky-500 text-white px-4 py-2 font-semibold rounded-t-2xl  shadow-md">
           <span>แก้ไขสินค้า</span>
-          <button onClick={onClose}>X</button>
+          <button onClick={onClose} className="hover:cursor-pointer">X</button>
         </div>
         <div className="p-4 space-y-2  shadow-md">
           <div>
@@ -167,7 +167,7 @@ const EditProduct = ({ onClose, data, getData }) => {
             <div className="space-y-2 ml-4">
               <div>อัพโหลดรูปภาพ</div>
               <input
-                className="border border-gray-200 shadow-md px-2 h-[30px] w-[215px]"
+                className="border border-gray-200 shadow-md px-2 h-[30px] w-[215px] hover:cursor-pointer"
                 type="file"
                 multiple
                 onChange={(e) => setNewImages(Array.from(e.target.files))}

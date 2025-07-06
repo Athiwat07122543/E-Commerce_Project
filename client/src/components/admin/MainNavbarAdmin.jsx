@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../index.css";
 import { Link } from "react-router";
 import useStore from "../../store/useStore";
-
+import MenuAdmin from "../../components/admin/card/MenuAdmin";
 const MainNavbarAdmin = () => {
+  const [popupMenu, setPopupMenu] = useState(false);
   const username = useStore((state) => state.user);
   return (
     <div className="flex justify-between bg-sky-500 h-[100px] text-center items-center px-10">
@@ -13,18 +14,17 @@ const MainNavbarAdmin = () => {
             Admin Panel
           </Link>
         </div>
-        <div className="mt-2  shadow-2xl h-[40px] w-[130px] items-center py-1 bg-sky-400 hover:bg-sky-300">
-          <Link className="text-xl text-white" to="/">
-            เข้าหน้าร้านค้า
-          </Link>
-        </div>
       </div>
-      <div>
-        <div className="flex">
-          <p className="text-4xl font-bold text-white text-right">
+      <div className="relative">
+        <div className="flex ">
+          <button
+            className="text-4xl font-bold text-white text-right hover:cursor-pointer"
+            onClick={() => setPopupMenu((prev) => !prev)}
+          >
             บัญชี: {username}
-          </p>
+          </button>
         </div>
+        {popupMenu && <MenuAdmin />}
       </div>
     </div>
   );

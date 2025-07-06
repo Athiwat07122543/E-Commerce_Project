@@ -15,11 +15,10 @@ const AddAddress = ({ getData, getClose }) => {
       phone: null,
     },
   ]);
-  
-useEffect(() => {
-  setAddress((prev) => ({ ...prev, username: user }));
-}, [user]);
 
+  useEffect(() => {
+    setAddress((prev) => ({ ...prev, username: user }));
+  }, [user]);
 
   const handleSave = async () => {
     try {
@@ -41,6 +40,8 @@ useEffect(() => {
         <div className="p-4 space-y-2">
           <div>ชื่อผู้รับ</div>
           <input
+            maxLength={30}
+            type="text"
             className="border w-full text-xl h-[40px] px-2"
             onChange={(e) =>
               setAddress({ ...address, recipientName: e.target.value })
@@ -48,7 +49,8 @@ useEffect(() => {
           />
           <div>เบอร์โทรศัพทิ์</div>
           <input
-            type="number"
+            maxLength={10}
+            type="text"
             className="border w-full text-xl h-[40px] px-2"
             onChange={(e) => setAddress({ ...address, phone: e.target.value })}
           />

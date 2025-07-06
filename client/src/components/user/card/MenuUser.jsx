@@ -38,7 +38,7 @@ const MenuUser = () => {
 
 
   return (
-    <div className="absolute left-0 top-full w-[160px] border bg-white border-gray-200 shadow-md rounded z-50 max-h-40 overflow-y-auto ml-4">
+    <div className="absolute left-0 top-full w-[160px] border bg-white border-gray-200 shadow-md rounded z-50 max-h-40 overflow-y-auto">
       {isAdmin && (
         <div className="hover:cursor-pointer text-center hover:bg-gray-200">
           <Link to="/admin">แดชบอร์ดแอดมิน</Link>

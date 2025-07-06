@@ -112,7 +112,7 @@ const Product = () => {
                     <td className="p-2 border border-gray-300 bg-white">
                       <button
                         value={item}
-                        className="rounded-md"
+                        className="rounded-md hover:cursor-pointer"
                         onClick={() => {
                           setPopupEdit(true), setEditData(item);
                         }}
@@ -129,7 +129,7 @@ const Product = () => {
                     </td>
                     <td className="p-2 border border-gray-300 bg-white">
                       <button
-                        className=""
+                        className="hover:cursor-pointer"
                         onClick={() => handleDeleteProduct(item.id)}
                       >
                         <MdDelete />

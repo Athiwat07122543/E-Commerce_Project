@@ -14,6 +14,7 @@ export const addCategory = async (token, data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
@@ -23,10 +24,11 @@ export const listCategory = async () => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
-export const editCategory = async (token,id, data) => {
+export const editCategory = async (token, id, data) => {
   try {
     const res = await axios.put(
       "http://localhost:3000/api/editcategory/" + id,
@@ -40,10 +42,11 @@ export const editCategory = async (token,id, data) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };
 
-export const deleteCategory = async (token,id) => {
+export const deleteCategory = async (token, id) => {
   try {
     const res = await axios.delete(
       "http://localhost:3000/api/deletecategory/" + id,
@@ -57,5 +60,6 @@ export const deleteCategory = async (token,id) => {
     return res;
   } catch (err) {
     console.log(err);
+    return err.response;
   }
 };

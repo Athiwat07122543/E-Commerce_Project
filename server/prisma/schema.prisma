@@ -19,19 +19,18 @@ enum Role {
 }
 
 model User {
-  id        Int             @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   username  String
   password  String
-  email     String          @unique
-  role      Role            @default(user)
+  email     String    @unique
+  role      Role      @default(user)
   enabled   Boolean
   image     String?
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   addresses Address[]
   cart      Cart?
   orders    Order[]
-  reviews   ReviewProduct[]
 }
 
 model Address {
@@ -57,20 +56,20 @@ model Category {
 }
 
 model Product {
-  id           Int             @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   name         String
   description  String?
-  quantity     Int             @default(0)
-  sold         Int             @default(0)
+  quantity     Int            @default(0)
+  sold         Int            @default(0)
   price        Int
-  category     Category?       @relation(fields: [categoryId], references: [id])
+  category     Category?      @relation(fields: [categoryId], references: [id])
   categoryId   Int?
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
   images       ProductImage[]
   orderDetails DetailOrder[]
-  reviews      ReviewProduct[]
-  cartDetails  DetailCart[]
+
+  cartDetails DetailCart[]
 }
 
 model ProductImage {
@@ -104,18 +103,6 @@ model DetailOrder {
   quantity  Int
   order     Order   @relation(fields: [orderId], references: [id])
   orderId   Int
-}
-
-model ReviewProduct {
-  id          Int      @id @default(autoincrement())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
-  product     Product  @relation(fields: [productId], references: [id])
-  productId   Int
-  description String?
-  star        Int      @default(5) @db.SmallInt
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 model Cart {

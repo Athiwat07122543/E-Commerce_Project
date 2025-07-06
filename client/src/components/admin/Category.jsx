@@ -78,7 +78,7 @@ const Category = () => {
   return (
     <div className="px-4 h-screen bg-gray-100">
       <div className="flex gap-10 h-[60px] items-center px-2">
-        <p className="flex items-center ">เพิ่มหมวดหมู่สินค้า</p>
+        <p className="flex items-center">เพิ่มหมวดหมู่สินค้า</p>
         <input
           className="border border-gray-300 text-center h-[40px] w-[200px] shadow-md "
           placeholder="ชื่อหมวดหมู่สินค้า"
@@ -87,7 +87,7 @@ const Category = () => {
           }
         ></input>
         <button
-          className="text-center w-[150px] h-[40px] bg-sky-500 text-white font-bold shadow-md borderhover:cursor-pointer"
+          className="text-center w-[150px] h-[40px] bg-sky-500 text-white font-bold shadow-md hover:cursor-pointer"
           onClick={handleAddCategory}
         >
           เพิ่มหมวดหมู่สินค้า

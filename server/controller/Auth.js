@@ -9,7 +9,7 @@ exports.register = async (req, res) => {
     const { username, password, confirmPassword, email } = await req.body;
 
     if (!username || username == "") {
-      return res.json({
+      return res.statu(400).json({
         success: false,
         error: "NO_USERNAME_INPUT",
         message: "กรุณาใส่ Username",
@@ -17,21 +17,21 @@ exports.register = async (req, res) => {
     }
 
     if (!password || password == "") {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "NO_PASSWORD_INPUT",
         message: "กรุณาใส่ Password",
       });
     }
     if (!confirmPassword || confirmPassword == "") {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "NO_CONFIRMPASSWORD_INPUT",
         message: "กรุณาใส่ Confirm Password",
       });
     }
     if (!email || email == "") {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "NO_EMAIL_INPUT",
         message: "กรุณาใส่ Email",
@@ -39,7 +39,7 @@ exports.register = async (req, res) => {
     }
 
     if (password !== confirmPassword) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "PASSWORD_NOT_MATCH",
         message: "รหัสผ่านไม่ตรงกัน",
@@ -55,7 +55,7 @@ exports.register = async (req, res) => {
     });
 
     if (getUsername) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "USERNAME_IS_ALREADY_EXISTS",
         message: "Username นี้ถูกใช้งานแล้ว",
@@ -72,7 +72,7 @@ exports.register = async (req, res) => {
     });
 
     if (checkEmail) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "Email_IS_ALREADY_EXISTS",
         message: "Email นี้ถูกใช้งานแล้ว",
@@ -80,6 +80,7 @@ exports.register = async (req, res) => {
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
+
     await prisma.user.create({
       data: {
         username: username,
@@ -90,18 +91,20 @@ exports.register = async (req, res) => {
         image: "",
       },
     });
-    res.json({ message: "สมัครบัญชีเรียบร้อย" });
+
+    res.status(200).json({ message: "สมัครบัญชีเรียบร้อย" });
   } catch (err) {
     console.log(err);
-    res.send(500).json({ message: "Register in controller has Error" });
+    res.send(500).json({ message: "Register ERROR" });
   }
 };
 
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
+
     if (!username || username.trim() === "") {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "NO_USERNAME_INPUT",
         message: "กรุณาใส่ Username",
@@ -109,7 +112,7 @@ exports.login = async (req, res) => {
     }
 
     if (!password || password.trim() === "") {
-      return res.json({
+      return res.status(400).json({
         success: false,
         error: "NO_PASSWORD_INPUT",
         message: "กรุณาใส่ Password",
@@ -122,7 +125,7 @@ exports.login = async (req, res) => {
     });
 
     if (!user) {
-      return res.json({
+      return res.status(401).json({
         success: false,
         error: "NO_USERNAME",
         message: "ไม่พบบัญชีผู้ใช้",
@@ -132,7 +135,7 @@ exports.login = async (req, res) => {
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      return res.json({
+      return res.status(401).json({
         success: false,
         error: "PASSWORD_NOT_MATCH",
         message: "รหัสผ่านไม่ถูกต้อง",
@@ -140,7 +143,7 @@ exports.login = async (req, res) => {
     }
 
     if (!user.enabled) {
-      return res.json({
+      return res.status(403).json({
         success: false,
         error: "ENABLED_FALSE",
         message: "บัญชีนี้ถูกปิดใช้งาน",
@@ -151,11 +154,11 @@ exports.login = async (req, res) => {
       { username: user.username, enabled: user.enabled, role: user.role },
       key,
       {
-        expiresIn: "100d",
+        expiresIn: "1d",
       }
     );
 
-    res.json({
+    res.status(200).json({
       success: true,
       message: "เข้าสู่ระบบสำเร็จ",
       user: {
@@ -166,9 +169,7 @@ exports.login = async (req, res) => {
     });
   } catch (err) {
     console.error("Login error:", err);
-    return res
-      .status(500)
-      .json({ success: false, message: "เกิดข้อผิดพลาดที่ server" });
+    return res.status(500).json({ success: false, message: "Login ERROR" });
   }
 };
 
@@ -179,13 +180,13 @@ exports.checkRole = async (req, res) => {
       return res.json({ error: "NO_TOKEN", message: "ไม่พบ Token" });
     }
     const authToken = authHeader.replace("Bearer ", "");
-    const payload = jwt.decode(authToken)
-    res.json({ payload });
+    const payload = jwt.decode(authToken);
+    res.status(200).json({ payload });
   } catch (err) {
     console.log(err);
     res.status(500).json({
       error: "INTERNAL_SERVER_ERROR",
-      message: "เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์",
+      message: "ERROR",
     });
   }
 };

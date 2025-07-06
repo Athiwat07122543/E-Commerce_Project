@@ -3,7 +3,6 @@ import { listUser } from "../../api/Admin";
 import { CiEdit } from "react-icons/ci";
 import EditUser from "./userCard/EditUser";
 import useStore from "../../store/useStore";
-import { toast } from "react-toastify";
 
 const User = () => {
   const token = useStore((state) => state.token);

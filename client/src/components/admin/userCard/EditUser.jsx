@@ -31,14 +31,14 @@ const EditUser = ({ onClose, data, getData }) => {
     <div className="fixed inset-0 flex justify-center items-center backdrop-blur-md z-50  rounded-2xl">
       <div className="bg-white shadow-lg w-[320px] rounded-2xl">
         <div className="flex justify-between items-center bg-sky-500 text-white px-4 py-2 font-semibold rounded-t-2xl">
-          <span>แก้ไข Category</span>
-          <button onClick={onClose}>X</button>
+          <span>แก้ไขหมวดหมู่</span>
+          <button onClick={onClose} className="hover:cursor-pointer">X</button>
         </div>
         <div className="px-4 py-4 space-y-4">
           <div className="relative">
             <label className="block mb-1 font-medium">สิทธิ์</label>
             <div
-              className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300 hover:cursor-pointer"
               onClick={() => setRole(true)}
             >
               {dataUser.role}
@@ -67,7 +67,7 @@ const EditUser = ({ onClose, data, getData }) => {
           <div className="relative">
             <label className="block mb-1 font-medium ">สถานะ</label>
             <div
-              className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300 hover:cursor-pointer"
               onClick={() => setEnabled(true)}
             >
               {dataUser.enabled ? "ใช้งาน" : "ปิดการใช้งาน"}
@@ -94,15 +94,15 @@ const EditUser = ({ onClose, data, getData }) => {
                 </div>
               </div>
             )}
-            <div className="space-y-4 py-4">
+            <div className="mt-4">
               <button
-                className="px-2 border rounded-md py-2"
+                className="px-2 rounded-md hover:cursor-pointer"
                 onClick={async () => {
                   await onClose();
                   handleUpdate();
                 }}
               >
-                <MdOutlineSaveAs />
+                <MdOutlineSaveAs size={36}/>
               </button>
             </div>
           </div>
