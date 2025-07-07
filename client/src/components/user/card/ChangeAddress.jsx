@@ -70,7 +70,7 @@ const ChangeAddress = ({ getClose }) => {
             {address?.data && address?.data.length > 0 ? (
               <>
                 {address?.data?.map((item, index) => (
-                  <>
+                  <div key={index}>
                     {item.isDefault ? (
                       <div
                         className="border border-gray-300 shadow-md h-[140px] w-full mb-4 p-2 bg-gray-50"
@@ -128,7 +128,7 @@ const ChangeAddress = ({ getClose }) => {
                         </div>
                       </div>
                     )}
-                  </>
+                  </div>
                 ))}
               </>
             ) : (

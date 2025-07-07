@@ -1,8 +1,8 @@
 import React, { use, useEffect, useState } from "react";
-import useStore from "../store/useStore";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import numeral from "numeral";
+import useStore from "../store/useStore"
 
 const Sidebar = () => {
   const getCategory = useStore((state) => state.getCategory);

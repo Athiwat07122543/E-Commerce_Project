@@ -61,7 +61,7 @@ exports.checkOut = async (req, res) => {
         product_data: {
           name: item.name,
         },
-        unit_amount: Number(item.price * 100),
+        unit_amount: Number(item.price),
       },
       quantity: Number(item.count),
     }));

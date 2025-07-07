@@ -75,9 +75,9 @@ const Payment = () => {
     <div className="p-4 flex justify-between">
       <div className="w-7/10">
         <div className="h-[360px] ml-8 mt-8 mr-4 shadow-2xl border border-gray-100">
-          <div className="ml-8 mt-8 mr-8  bg-sky-500 text-white w-[140px] h-[50px] items-center text-center py-2 shadow-md hover:bg-sky-600 hover:cursor-pointer text-xl">
+          <div className="ml-8 mt-8 mr-8  bg-sky-500 text-white w-[160px] h-[50px] items-center text-center py-2 shadow-md hover:bg-sky-600 hover:cursor-pointer text-xl">
             <button onClick={() => setPopupChangeAddress(true)}>
-              เปลื่ยนที่จัดส่ง
+              จัดการที่อยู่จัดส่ง
             </button>
           </div>
           <div className="flex ml-8 mt-4 mr-8 space-x-10">

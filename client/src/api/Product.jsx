@@ -6,6 +6,7 @@ export const listProduct = async (count) => {
       "http://localhost:3000/api/listproduct",
       count
     );
+
     return res;
   } catch (err) {
     console.log(err);

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "../index.css";
 import { toast } from "react-toastify";
 import { register } from "../api/Auth";
+import { useNavigate } from "react-router";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -19,6 +21,7 @@ const Register = () => {
         return toast.warning(res.data.message);
       }
       if (res.status == 200) {
+        navigate("/login")
         return toast.success("สมัครบัญชีสำเร็จ");
       }
     } catch (err) {
@@ -60,7 +63,7 @@ const Register = () => {
             className="border p-2 shadow-md border-gray-100 hover:cursor-pointer hover:bg-gray-200 rounded-md"
             type="submit"
           >
-            เข้าสู่ระบบ
+            สมัครสมาชิก
           </button>
         </p>
       </form>

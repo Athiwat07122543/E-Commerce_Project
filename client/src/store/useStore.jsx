@@ -51,6 +51,9 @@ const useStore = create(
       actionUpdateCart: async () => {
         try {
           const token = get().token;
+          if (!token) {
+            return;
+          }
           const getListCart = await getCart(token);
           const listCart = getListCart?.data || [];
           set({

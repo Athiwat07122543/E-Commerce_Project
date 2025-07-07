@@ -10,7 +10,6 @@ const Home = () => {
   const actionUpdateCart = useStore((state) => state.actionUpdateCart);
   const token = useStore((state) => state.token);
   const user = useStore((state) => state.user);
-  const cart = useStore((state) => state.cart);
   const [popUpDatilProduct, setPopUpDetailProduct] = useState(false);
   const [detailProduct, setDetailProduct] = useState([]);
   const products = useStore((state) => state.products);
@@ -19,17 +18,9 @@ const Home = () => {
 
   useEffect(() => {
     getProduct();
-    actionUpdateCart(token)
+
+    actionUpdateCart(token);
   }, []);
-
-
-
-  const haveToken = async () => {
-    useEffect(() => {
-      getProduct();
-      actionUpdateCart(token);
-    }, []);
-  };
 
   const handleActionAddCart = async (product) => {
     if (user === null) {

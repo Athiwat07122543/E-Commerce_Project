@@ -20,7 +20,6 @@ const TotalSalesToDay = () => {
     getData()
   },[])
 
-  console.log(orders)
   return (
     <div>
       <div className="py-4 text-center font-bold text-4xl">
