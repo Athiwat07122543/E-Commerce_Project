@@ -135,7 +135,7 @@ const Payment = () => {
                 {item.images && item.images.length > 0 && item.images[0] ? (
                   <img
                     className="w-[240px] h-[180px]"
-                    src={`http://localhost:3000/uploads/${item.images[0].imageUrl}`}
+                    src={`https://e-commerce-project-backend-mu.vercel.app/uploads/${item.images[0].imageUrl}`}
                   />
                 ) : (
                   <div className="w-[240px] h-[180px] flex items-center px-16">

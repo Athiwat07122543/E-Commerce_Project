@@ -12,7 +12,7 @@ const UploadPage = () => {
     try {
       console.log(formData);
       const res = await axios.post(
-        "http://localhost:3000/api/upload",
+        "https://e-commerce-project-backend-mu.vercel.app/api/upload",
         formData,
         {
           headers: {

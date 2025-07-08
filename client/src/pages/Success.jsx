@@ -19,7 +19,7 @@ const Success = () => {
     doAfterPayment();
   }, []);
 
-  return <div>ชำระเงินสำเร็จ ขอบคุณสำหรับการสั่งซื้อ!</div>;
+  return <div className="flex justify-center items-center mt-20 font-bold text-4xl">ชำระเงินสำเร็จ ขอบคุณสำหรับการสั่งซื้อ!</div>;
 };
 
 export default Success;

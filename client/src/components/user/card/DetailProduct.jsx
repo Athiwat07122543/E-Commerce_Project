@@ -28,10 +28,12 @@ const DetailProduct = ({ data, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center backdrop-blur-md z-50  rounded-2xl">
+    <div className="fixed inset-0 flex justify-center items-center backdrop-blur-md z-50 rounded-2xl">
       <div className="bg-white shadow-2xl w-[1225px] h-[600px] rounded-2xl">
         <div className="flex justify-between items-center bg-blue-500 text-white px-4 py-2 font-semibold rounded-t-2xl">
-          <button onClick={() => onClose()}>X</button>
+          <button onClick={() => onClose()} className="hover:cursor-pointer">
+            X
+          </button>
         </div>
         <div className="px-4 space-y-4">
           <div className="flex gap-2 overflow-auto w-full"></div>
@@ -42,7 +44,7 @@ const DetailProduct = ({ data, onClose }) => {
                   <img
                     key={index}
                     className="w-[300px] h-[300px] "
-                    src={`http://localhost:3000/uploads/${item.imageUrl}`}
+                    src={`https://e-commerce-project-backend-mu.vercel.app/uploads/${item.imageUrl}`}
                   />
                 ))}
               </>
@@ -67,7 +69,7 @@ const DetailProduct = ({ data, onClose }) => {
               </div>
               <button
                 className="font-bold text-xl shadow-2xl bg-red-500 h-[50px] w-[100px] rounded-md hover:bg-red-300"
-                onClick={()=>handleActionAddCart(product)}
+                onClick={() => handleActionAddCart(product)}
               >
                 สั่งซื้อ
               </button>

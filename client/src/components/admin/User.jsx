@@ -26,74 +26,85 @@ const User = () => {
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <div className="px-4 py-4 h-screen bg-gray-100">
-      <table className="table-auto px-2 w-full shadow-md border border-gray-300">
-        <thead>
-          <tr className="bg-sky-500 h-[50px] ">
-            <th className="w-[70px] border border-gray-300 text-white">
-              ลำดับ
-            </th>
-            <th className="w-[750px] border border-gray-300 text-white">
-              ชื่อบัญชี
-            </th>
-            <th className="w-[750px] border border-gray-300 text-white">
-              อีเมล
-            </th>
-            <th className="w-[100px]  border border-gray-300 text-white">
-              สิทธิ์
-            </th>
-            <th className="w-[150px]  border border-gray-300 text-white">
-              สถานะ
-            </th>
-            <th className="w-[70px]  border border-gray-300 text-white">
-              แก้ไข
-            </th>
-          </tr>
-          {user === null ? (
-            <div>ไม่มีข้อมูล</div>
-          ) : (
-            <>
-              {user?.map((item, index) => (
-                <tr key={index}>
-                  <td className=" p-2 border border-gray-300 bg-white">
-                    {item.id}
-                  </td>
-                  <td className=" p-2 border border-gray-300 bg-white">
-                    {item.username}
-                  </td>
-                  <td className=" p-2 border border-gray-300 bg-white">
-                    {item.email}
-                  </td>
-                  <td className=" p-2 border border-gray-300 bg-white">
-                    {item.role}
-                  </td>
-                  <td className=" p-2 border border-gray-300 bg-white">
-                    {item.enabled ? "ใช้งาน" : "ปิดการใช้งาน"}
-                  </td>
-                  <td className=" p-2 border border-gray-300 bg-white">
-                    <button
-                      className="hover:cursor-pointer"
-                      onClick={() => {
-                        setDropDown(true), setEditUser(item);
-                      }}
-                    >
-                      <CiEdit />
-                    </button>
-                    {dropdown && (
-                      <EditUser
-                        onClose={() => setDropDown(false)}
-                        data={editUser}
-                        getData={() => getData()}
-                      />
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </>
-          )}
-        </thead>
-      </table>
+      {Array.isArray(user) ? (
+        <div>
+          <table className="table-auto px-2 w-full shadow-md border border-gray-300">
+            <thead>
+              <tr className="bg-sky-500 h-[50px] ">
+                <th className="w-[70px] border border-gray-300 text-white">
+                  ลำดับ
+                </th>
+                <th className="w-[750px] border border-gray-300 text-white">
+                  ชื่อบัญชี
+                </th>
+                <th className="w-[750px] border border-gray-300 text-white">
+                  อีเมล
+                </th>
+                <th className="w-[100px]  border border-gray-300 text-white">
+                  สิทธิ์
+                </th>
+                <th className="w-[150px]  border border-gray-300 text-white">
+                  สถานะ
+                </th>
+                <th className="w-[70px]  border border-gray-300 text-white">
+                  แก้ไข
+                </th>
+              </tr>
+              {user === null ? (
+                <div>ไม่มีข้อมูล</div>
+              ) : (
+                <>
+                  {user?.map((item, index) => (
+                    <tr key={index}>
+                      <td className=" p-2 border border-gray-300 bg-white">
+                        {item.id}
+                      </td>
+                      <td className=" p-2 border border-gray-300 bg-white">
+                        {item.username}
+                      </td>
+                      <td className=" p-2 border border-gray-300 bg-white">
+                        {item.email}
+                      </td>
+                      <td className=" p-2 border border-gray-300 bg-white">
+                        {item.role}
+                      </td>
+                      <td className=" p-2 border border-gray-300 bg-white">
+                        {item.enabled ? "ใช้งาน" : "ปิดการใช้งาน"}
+                      </td>
+                      <td className=" p-2 border border-gray-300 bg-white">
+                        <button
+                          className="hover:cursor-pointer"
+                          onClick={() => {
+                            setDropDown(true), setEditUser(item);
+                          }}
+                        >
+                          <CiEdit />
+                        </button>
+                        {dropdown && (
+                          <EditUser
+                            onClose={() => setDropDown(false)}
+                            data={editUser}
+                            getData={() => getData()}
+                          />
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              )}
+            </thead>
+          </table>
+        </div>
+      ) : (
+        <tr>
+          <td colSpan="6" className="text-center p-4 text-gray-500">
+            กำลังโหลดข้อมูลบัญชีผู้ใช้งาน
+          </td>
+        </tr>
+      )}
     </div>
   );
 };

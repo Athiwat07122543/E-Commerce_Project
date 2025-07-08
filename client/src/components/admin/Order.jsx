@@ -59,70 +59,84 @@ const Order = () => {
             <option value="จัดส่งสินค้า">จัดส่งสินค้า</option>
           </select>
         </div>
-        <table className="table-auto px-2 p-2 w-full shadow-md ">
-          <thead>
-            <tr className="bg-sky-500 h-[50px]">
-              <th className="border border-gray-300 w-[40px] p-2">ลำดับ</th>
-              <th className="border border-gray-300 w-[80px] p-2">
-                วันที่สั่งซื้อ
-              </th>
-              <th className="border border-gray-300 w-[220px] p-2">ชื่อ</th>
-              <th className="border border-gray-300 w-[40px] p-2">ยอดรวม</th>
-              <th className="border border-gray-300 w-[40px] p-2">สถานะ</th>
-              <th className="border border-gray-300 w-[40px] p-2">อัพเดท</th>
-              <th className="border border-gray-300 w-[40px] p-2">
-                ดูรายละเอียด
-              </th>
-            </tr>
-            {orders.map((item, index) => (
-              <tr className="border border-gray-300 p-2" key={index}>
-                <td className="border border-gray-300 p-2">{index + 1}</td>
-                <td className="border border-gray-300 p-2">
-                  {moment(item.createdAt).format("LLL")}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {item.user.username}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {numeral(item.totalPrice).format("0,0")}
-                </td>
-                <td className="border border-gray-300 p-2">{item.status}</td>
-                <td className="border border-gray-300 p-2">
-                  <button
-                  className="hover:cursor-pointer"
-                    onClick={() => {
-                      setPopupUpdateOrder(true), setOrderBy(item);
-                    }}
-                  >
-                    <FaRegEdit size={24} />
-                  </button>
-                  {popupUpdateOrder && (
-                    <UpdateOrder
-                      onClose={() => setPopupUpdateOrder(false)}
-                      data={orderBy}
-                    />
-                  )}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <button
-                  className="hover:cursor-pointer"
-                    onClick={() => {
-                      setPopupDetailOrder(true), setOrderBy(item);
-                    }}
-                  >
-                    <FaRegEdit size={24} />
-                  </button>
-                  {popupDetailOrder && (
-                    <DetailOrder
-                      onClose={() => setPopupDetailOrder(false)}
-                      data={orderBy}
-                    />
-                  )}
-                </td>
-              </tr>
-            ))}
-          </thead>
-        </table>
+        {Array.isArray(orders) ? (
+          orders.length > 0 ? (
+            <table className="table-auto px-2 p-2 w-full shadow-md ">
+              <thead>
+                <tr className="bg-sky-500 h-[50px]">
+                  <th className="border border-gray-300 w-[40px] p-2">ลำดับ</th>
+                  <th className="border border-gray-300 w-[80px] p-2">
+                    วันที่สั่งซื้อ
+                  </th>
+                  <th className="border border-gray-300 w-[220px] p-2">ชื่อ</th>
+                  <th className="border border-gray-300 w-[40px] p-2">
+                    ยอดรวม
+                  </th>
+                  <th className="border border-gray-300 w-[40px] p-2">สถานะ</th>
+                  <th className="border border-gray-300 w-[40px] p-2">
+                    อัพเดท
+                  </th>
+                  <th className="border border-gray-300 w-[40px] p-2">
+                    ดูรายละเอียด
+                  </th>
+                </tr>
+                {orders.map((item, index) => (
+                  <tr className="border border-gray-300 p-2" key={index}>
+                    <td className="border border-gray-300 p-2">{index + 1}</td>
+                    <td className="border border-gray-300 p-2">
+                      {moment(item.createdAt).format("LLL")}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {item.user.username}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {numeral(item.totalPrice).format("0,0")}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {item.status}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      <button
+                        className="hover:cursor-pointer"
+                        onClick={() => {
+                          setPopupUpdateOrder(true), setOrderBy(item);
+                        }}
+                      >
+                        <FaRegEdit size={24} />
+                      </button>
+                      {popupUpdateOrder && (
+                        <UpdateOrder
+                          onClose={() => setPopupUpdateOrder(false)}
+                          data={orderBy}
+                        />
+                      )}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      <button
+                        className="hover:cursor-pointer"
+                        onClick={() => {
+                          setPopupDetailOrder(true), setOrderBy(item);
+                        }}
+                      >
+                        <FaRegEdit size={24} />
+                      </button>
+                      {popupDetailOrder && (
+                        <DetailOrder
+                          onClose={() => setPopupDetailOrder(false)}
+                          data={orderBy}
+                        />
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </thead>
+            </table>
+          ) : (
+            <div className="font-bold text-center text-2xl">ไม่พบข้อมูล</div>
+          )
+        ) : (
+          <div className="font-bold text-center text-2xl">กำลังโหลดข้อมูลรายการสั่งซื้อ</div>
+        )}
       </div>
       <div className="mt-10 flex">
         <button

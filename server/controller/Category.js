@@ -37,6 +37,9 @@ exports.createCategory = async (req, res) => {
 exports.getCategory = async (req, res) => {
   try {
     const data = await prisma.category.findMany();
+    if(!data){
+      return;
+    }
     res.send(data);
   } catch (err) {
     console.log(err);

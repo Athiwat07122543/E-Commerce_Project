@@ -13,8 +13,11 @@ const CheckRole = () => {
   useEffect(() => {
     const checkAdmin = async () => {
       try {
+        if(!token){
+          setIsAdmin(false);
+        }
         const res = await checkRole(token);
-        if(!res.data.payload || res.data.payload == null){
+        if (!res.data.payload || res.data.payload == null) {
           return;
         }
         if (res.data.payload.role !== "admin") {

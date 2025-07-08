@@ -37,7 +37,7 @@ const Category = () => {
       return toast.warning("กรุณาใส่ชื่อหมวดหมู่สินค้า");
     }
     try {
-      const res = await addCategory(token,nameCategory);
+      const res = await addCategory(token, nameCategory);
       if (!res.data.success) {
         if (res.data.error === "CAN'T_ADD_CATEGORY") {
           return toast.warning(res.data.message);
@@ -63,7 +63,7 @@ const Category = () => {
       });
 
       if (result.isConfirmed) {
-        const res = await deleteCategory(token,id);
+        const res = await deleteCategory(token, id);
         await getData();
         await Swal.fire({
           title: "ลบหมวดหมู่สินค้าเรียบร้อย",
@@ -111,38 +111,40 @@ const Category = () => {
         </thead>
         <tbody>
           {data && data.length > 0 ? (
-            data?.map((item, index) => (
-              <tr key={index}>
-                <td className=" p-2 border border-gray-300 bg-white">
-                  {index + 1}
-                </td>
-                <td className=" p-2 border border-gray-300 bg-white">
-                  {item.name}
-                </td>
-                <td className=" p-2 border border-gray-300 bg-white">
-                  {item.enabled ? "ขาย" : "ยกเลิกขาย"}
-                </td>
-                <td className=" p-2 border border-gray-300 bg-white">
-                  <button
-                    className=" p-2 text-center rounded-md bg-white hover:cursor-pointer"
-                    onClick={() => {
-                      setEditCategoryData(item), setShowEdit(true);
-                    }}
-                  >
-                    <CiEdit />
-                  </button>
-                </td>
+            data
+              ?.sort((a, b) => a.id - b.id)
+              .map((item, index) => (
+                <tr key={index}>
+                  <td className=" p-2 border border-gray-300 bg-white">
+                    {index + 1}
+                  </td>
+                  <td className=" p-2 border border-gray-300 bg-white">
+                    {item.name}
+                  </td>
+                  <td className=" p-2 border border-gray-300 bg-white">
+                    {item.enabled ? "ขาย" : "ยกเลิกขาย"}
+                  </td>
+                  <td className=" p-2 border border-gray-300 bg-white">
+                    <button
+                      className=" p-2 text-center rounded-md bg-white hover:cursor-pointer"
+                      onClick={() => {
+                        setEditCategoryData(item), setShowEdit(true);
+                      }}
+                    >
+                      <CiEdit />
+                    </button>
+                  </td>
 
-                <td className="p-2 border border-gray-300 bg-white ">
-                  <button
-                    className="p-2 text-center bg-white hover:cursor-pointer"
-                    onClick={() => handleDeleteCategory(item.id)}
-                  >
-                    <MdDelete />
-                  </button>
-                </td>
-              </tr>
-            ))
+                  <td className="p-2 border border-gray-300 bg-white ">
+                    <button
+                      className="p-2 text-center bg-white hover:cursor-pointer"
+                      onClick={() => handleDeleteCategory(item.id)}
+                    >
+                      <MdDelete />
+                    </button>
+                  </td>
+                </tr>
+              ))
           ) : (
             <tr>
               <td colSpan="5" className="text-center p-4 text-gray-500">

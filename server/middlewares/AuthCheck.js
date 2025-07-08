@@ -6,15 +6,22 @@ const key = process.env.JWT;
 exports.checkUser = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
-    if (!authHeader) {
+    if (!authHeader || authHeader == null || authHeader == "null") {
+      return res.json({
+        success: false,
+        error: "AUTHHEADER_ERROR",
+        message: "ไม่สามารถใช้งานได้",
+      });
+    }
+    const token = authHeader && authHeader.split(" ")[1];
+
+    if (!token || token === "null") {
       return res.json({
         success: false,
         error: "NO_TOKEN",
         message: "ไม่สามารถใช้งานได้",
       });
     }
-
-    const token = authHeader && authHeader.split(" ")[1];
     const decoded = jwt.verify(token, key);
     req.user = decoded;
 

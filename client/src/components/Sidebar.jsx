@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import numeral from "numeral";
-import useStore from "../store/useStore"
+import useStore from "../store/useStore";
 
 const Sidebar = () => {
   const getCategory = useStore((state) => state.getCategory);
@@ -55,7 +55,7 @@ const Sidebar = () => {
       setOk(!ok);
     }, 300);
   };
-
+  
   return (
     <div className="p-4 h-screen bg-sky-50">
       <input
@@ -64,9 +64,7 @@ const Sidebar = () => {
         type="text"
         placeholder="ค้นหาสินค้า"
       />
-      {!categorys ? (
-        getCategory()
-      ) : (
+      {Array.isArray(categorys) ? (
         <div className="ml-2 mr-2 mb-2">
           {categorys.map((item) => (
             <div key={item.id} className="flex gap-4">
@@ -75,10 +73,12 @@ const Sidebar = () => {
                 value={item.id}
                 onChange={handleCategory}
               />
-              <div key={item.id}>{item.name}</div>
+              <div>{item.name}</div>
             </div>
           ))}
         </div>
+      ) : (
+        <div></div>
       )}
 
       <div>

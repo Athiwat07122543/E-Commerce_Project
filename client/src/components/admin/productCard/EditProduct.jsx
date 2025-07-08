@@ -98,7 +98,7 @@ const EditProduct = ({ onClose, data, getData }) => {
                       </div>
                       <img
                         className="w-[300px] h-[300px] object-cover max-w-full border border-gray-200 shadow-md"
-                        src={`http://localhost:3000/uploads/${item.imageUrl}`}
+                        src={`https://e-commerce-project-backend-mu.vercel.app/uploads/${item.imageUrl}`}
                       />
                     </div>
                   ))}
@@ -112,7 +112,7 @@ const EditProduct = ({ onClose, data, getData }) => {
           </div>
           <div>ชื่อ</div>
           <input
-            className="border px-2 w-[150px] shadow-md border-gray-200 h-[30px]"
+            className="border px-2 w-[300px] shadow-md border-gray-200 h-[40px]"
             value={product.name || ""}
             onChange={(e) => setProduct({ ...product, name: e.target.value })}
           />
@@ -133,7 +133,7 @@ const EditProduct = ({ onClose, data, getData }) => {
               <input
                 min="0"
                 type="number"
-                className="border px-2 w-[150px] shadow-md border-gray-200 h-[30px]"
+                className="border px-2 w-[150px] shadow-md border-gray-200 h-[40px]"
                 value={product.quantity || ""}
                 onChange={(e) =>
                   setProduct({ ...product, quantity: e.target.value })
@@ -145,7 +145,7 @@ const EditProduct = ({ onClose, data, getData }) => {
               <input
                 min="0"
                 type="number"
-                className="border px-2 w-[150px] shadow-md border-gray-200 h-[30px]"
+                className="border px-2 w-[150px] shadow-md border-gray-200 h-[40px]"
                 value={product.sold}
                 onChange={(e) =>
                   setProduct({ ...product, sold: e.target.value })
@@ -157,7 +157,7 @@ const EditProduct = ({ onClose, data, getData }) => {
               <input
                 min="0"
                 type="number"
-                className="border px-2 w-[150px] shadow-md border-gray-200 h-[30px]"
+                className="border px-2 w-[150px] shadow-md border-gray-200 h-[40px]"
                 value={product.price || ""}
                 onChange={(e) =>
                   setProduct({ ...product, price: e.target.value })
@@ -167,7 +167,7 @@ const EditProduct = ({ onClose, data, getData }) => {
             <div className="space-y-2 ml-4">
               <div>อัพโหลดรูปภาพ</div>
               <input
-                className="border border-gray-200 shadow-md px-2 h-[30px] w-[215px] hover:cursor-pointer"
+                className="border border-gray-200 shadow-md px-2 h-[40px] w-[215px] hover:cursor-pointer py-2"
                 type="file"
                 multiple
                 onChange={(e) => setNewImages(Array.from(e.target.files))}

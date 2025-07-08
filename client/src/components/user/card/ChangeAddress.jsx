@@ -54,12 +54,12 @@ const ChangeAddress = ({ getClose }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center backdrop-blur-md z-50 rounded-2xl">
-      <div className="bg-white shadow-2xl w-[500px] rounded-2xl ">
+      <div className="bg-white shadow-2xl w-[500px] rounded-2xl">
         <div className="flex justify-between items-center bg-sky-500 text-white px-4 py-2 font-semibold rounded-t-2xl ">
           <span>เพิ่มสินค้า</span>
           <button onClick={getClose}>X</button>
         </div>
-        <div className="p-4 ">
+        <div className="p-4">
           <div className="max-h-[600px] w-auto overflow-y-auto">
             <button
               className="h-[40px] w-[70px] mb-2 shadow-2xl text-white bg-sky-500 hover:bg-sky-600 hover:cursor-pointer"

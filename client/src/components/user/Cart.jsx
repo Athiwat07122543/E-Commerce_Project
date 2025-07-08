@@ -65,7 +65,7 @@ const Cart = () => {
                 {item.images && item.images.length > 0 && item.images[0] ? (
                   <img
                     className="w-[500px] h-[300px] p-4"
-                    src={`http://localhost:3000/uploads/${item.images[0].imageUrl}`}
+                    src={`https://e-commerce-project-backend-mu.vercel.app/uploads/${item.images[0].imageUrl}`}
                   />
                 ) : (
                   <div className="flex w-[500px] h-[300px] items-center px-40">

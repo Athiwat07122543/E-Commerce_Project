@@ -34,13 +34,11 @@ const Home = () => {
 
   return (
     <div className="flex">
-      <div className="w-[250px] h-screen">
+      <div className="w-[250px]">
         <Sidebar />
       </div>
-      <div className="p-4 h-screen flex gap-2 flex-wrap">
-        {!products ? (
-          getProduct()
-        ) : (
+      <div className="p-4 flex gap-2 flex-wrap">
+        {Array.isArray(products) ? (
           <>
             {products
               .sort((a, b) => a.id - b.id)
@@ -50,11 +48,12 @@ const Home = () => {
                     <div className=" h-[200px] w-full text-center items-center">
                       {item.images && item.images.length > 0 ? (
                         <img
-                          src={`http://localhost:3000/uploads/${item.images[0].imageUrl}`}
+                          src={`https://e-commerce-project-backend-mu.vercel.app/uploads/${item.images[0].imageUrl}`}
                           alt={item.name}
                           className="object-cover h-full w-full hover:scale-105"
                           onClick={() => {
-                            setPopUpDetailProduct(true), setDetailProduct(item);
+                            setPopUpDetailProduct(true);
+                            setDetailProduct(item);
                           }}
                         />
                       ) : (
@@ -66,13 +65,13 @@ const Home = () => {
                     <div className="font-bold py-2 text-xl max-h-[70px] h-[70px] w-full">
                       {item.name}
                     </div>
-                    <div className="mt-2 max-h-[60px] h-[60px] w-full  text-ellipsis overflow-y-scroll">
+                    <div className="mt-2 max-h-[60px] h-[60px] w-full text-ellipsis overflow-y-scroll">
                       {item.description}
                     </div>
                     <div className="flex justify-between h-[50px] max-h-[50px] mt-3">
                       <div className="font-bold text-xl flex gap-2 w-[280px]">
                         <div className="py-2">ราคา</div>
-                        <div className="px-2 text-red-500 text-4xl  w-[150px] text-center">
+                        <div className="px-2 text-red-500 text-4xl w-[150px] text-center">
                           {numeral(item.price).format("0,0")}
                         </div>
                         <div className="py-2">บาท</div>
@@ -103,6 +102,8 @@ const Home = () => {
                 </div>
               ))}
           </>
+        ) : (
+          <div>กำลังโหลดรายการสินค้า</div>
         )}
       </div>
     </div>

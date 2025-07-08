@@ -31,14 +31,14 @@ const EditCategory = ({ onClose, category, getData }) => {
     }
   };
 
-
-  console.log(data)
   return (
     <div className="fixed inset-0 flex justify-center items-center backdrop-blur-md z-50  rounded-2xl">
       <div className="bg-white shadow-lg w-[320px] rounded-2xl">
         <div className="flex justify-between items-center bg-sky-500 text-white px-4 py-2 font-semibold rounded-t-2xl">
           <span>แก้ไข Category</span>
-          <button onClick={onClose} className="hover:cursor-pointer">X</button>
+          <button onClick={onClose} className="hover:cursor-pointer">
+            X
+          </button>
         </div>
 
         <div className="px-4 py-4 space-y-4">
@@ -82,8 +82,11 @@ const EditCategory = ({ onClose, category, getData }) => {
               </div>
             )}
           </div>
-          <button className="px-2 rounded-md py-2 hover:cursor-pointer" onClick={handleSave}>
-            <MdOutlineSaveAs size={36}/>
+          <button
+            className="px-2 rounded-md py-2 hover:cursor-pointer"
+            onClick={handleSave}
+          >
+            <MdOutlineSaveAs size={36} />
           </button>
         </div>
       </div>

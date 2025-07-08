@@ -13,7 +13,7 @@ import UploadPage from "../pages/UploadPage";
 import PaymentPage from "../pages/user/PaymentPage";
 import CheckUser from "./CheckUser";
 import Success from "../pages/Success";
-import Cancel from "../pages/cancel";
+import Cancel from "../pages/Cancel";
 import CartPage from "../pages/user/CartPage";
 import OrderPage from "../pages/user/OrderPage";
 import OrdersPage from "../pages/admin/OrdersPage";

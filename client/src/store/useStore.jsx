@@ -11,6 +11,7 @@ import {
   updateStock,
 } from "../api/User";
 
+
 const useStore = create(
   persist(
     (set, get) => ({
@@ -38,6 +39,7 @@ const useStore = create(
         }
       },
       actionLogout: (async) => {
+
         try {
           set({
             user: null,
@@ -74,11 +76,15 @@ const useStore = create(
       getProduct: async () => {
         try {
           const res = await listProduct();
-          set({ products: res.data });
+          const productList = Array.isArray(res.data)
+            ? res.data
+            : res.data.data || [];
+          set({ products: productList });
         } catch (err) {
           console.log(err);
         }
       },
+
       actionAfterPayment: async () => {
         const token = get().token;
 
