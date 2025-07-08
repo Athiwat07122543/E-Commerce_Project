@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import html2canvas from "html2canvas-pro";
+
+import html2canvas from "html2canvas-pro"
 import { jsPDF } from "jspdf";
 
 const ReceiptPDF = ({ getData, onClose }) => {
