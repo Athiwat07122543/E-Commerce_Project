@@ -40,12 +40,13 @@ exports.getCategory = async (req, res) => {
     if(!data){
       return;
     }
-    res.send(data);
+    res.status(200).json(data);
   } catch (err) {
     console.log(err);
-    res.json({
-      error: "CAN'T_GET_CATEGORY",
-      message: "ไม่สามารดูประเภทสินค้าได้",
+    return res.status(500).json({
+      success: false,
+      error: "GET_CATEGORY_ERROR",
+      message: "Get category error",
     });
   }
 };
@@ -63,9 +64,14 @@ exports.editCategory = async (req, res) => {
         enabled: enabled,
       },
     });
-    res.send({ data });
+    res.status(200).json(data)
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "EDIT_CATEGORY_ERROR",
+      message: "Edit category error",
+    });
   }
 };
 
@@ -77,8 +83,13 @@ exports.deleteCategory = async (req, res) => {
         id: Number(id),
       },
     });
-    res.json({ data });
+    res.status(200).json( data );
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "DALETE_CATEGORY_ERROR",
+      message: "Delete category error",
+    });
   }
 };

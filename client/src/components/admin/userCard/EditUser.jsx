@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineSaveAs } from "react-icons/md";
 import { editUser } from "../../../api/Admin";
 import { toast } from "react-toastify";
-
+import useStore from "../../../store/useStore";
 const EditUser = ({ onClose, data, getData }) => {
+  const token = useStore((state) => state.token)
   const [role, setRole] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [dataUser, setDataUser] = useState({
@@ -17,7 +18,7 @@ const EditUser = ({ onClose, data, getData }) => {
 
   const handleUpdate = async () => {
     try {
-      const result = await editUser(data.id, dataUser);
+      const result = await editUser(token,data.id, dataUser);
       onClose();
       getData();
       toast.success("อัพเดทข้อมูลบัญชีผู้ใช้งานเรียบร้อย");
@@ -90,7 +91,7 @@ const EditUser = ({ onClose, data, getData }) => {
                       setDataUser({ ...dataUser, enabled: false });
                   }}
                 >
-                  เปิดการใช้งาน
+                  ปิดใช้งาน
                 </div>
               </div>
             )}

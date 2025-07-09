@@ -18,12 +18,12 @@ const Login = () => {
       const res = await login(data);
       if (res.status == 400) {
         return toast.warning(res.data.message);
-      }
-
-      if (res.status == 401) {
+      }else if(res.status == 401){
         return toast.warning(res.data.message);
+      }else if(res.status == 403){
+                return toast.warning(res.data.message);
       }
-
+      
       if (res.status == 200) {
         if (res.data.user.role == "admin") {
           navigate("/admin");

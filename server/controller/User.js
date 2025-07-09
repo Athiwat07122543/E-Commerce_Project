@@ -30,8 +30,7 @@ exports.addAddress = async (req, res) => {
           isDefault: false,
         },
       });
-      res.json(address);
-      return;
+      return res.status(200).json(address);
     } else {
       const address = await prisma.address.create({
         data: {
@@ -42,11 +41,15 @@ exports.addAddress = async (req, res) => {
           isDefault: true,
         },
       });
-      res.json(address);
-      return;
+      return res.status(200).json(address);
     }
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "ADD_ADDRESS_ERROR",
+      message: "Add address error",
+    });
   }
 };
 
@@ -66,9 +69,14 @@ exports.getAddress = async (req, res) => {
         userId: Number(userId.id),
       },
     });
-    res.send(address);
+    return res.status(200).json(address);
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "GET_ADDRESS_ERROR",
+      message: "Get Address error",
+    });
   }
 };
 
@@ -113,9 +121,14 @@ exports.changeAddress = async (req, res) => {
       },
     });
 
-    res.send("work");
+    return res.status(200).json({ message: "success" });
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "CHANGE_ADDRESS_ERROR",
+      message: "Change address error",
+    });
   }
 };
 
@@ -188,10 +201,14 @@ exports.addCart = async (req, res) => {
         },
       });
     }
-    res.send("work");
+    res.status(200).json({ message: "Success" });
   } catch (err) {
-    console.log("Error adding to cart:", err);
-    res.status(500).send("server error");
+    console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "ADD_CART_ERROR",
+      message: "Add cart error",
+    });
   }
 };
 
@@ -229,9 +246,13 @@ exports.reduceCart = async (req, res) => {
       });
       return res.json({ message: "0" });
     }
-    res.send("work");
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "REDUCE_CART_ERROR",
+      message: "Reduct cart error",
+    });
   }
 };
 
@@ -263,9 +284,14 @@ exports.getCart = async (req, res) => {
       },
     });
     const cartDetails = cart.map((item) => item.cartDetails).flat();
-    res.send(cartDetails);
+    res.status(200).json(cartDetails);
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "GET_CART_ERROR",
+      message: "Get cart error",
+    });
   }
 };
 
@@ -308,9 +334,13 @@ exports.clearCart = async (req, res) => {
       });
     }
 
-    res.send("ล้างตะกร้าเรียบร้อย");
+    res.status(200).json({ mesage: "success" });
   } catch (err) {
     console.error(" clearCart error:", err);
-    res.status(500).json({ error: "CLEAR_CART_FAILED", message: err.message });
+    return res.status(500).json({
+      success: false,
+      error: "CLEART_CART_ERROR",
+      message: "Cleart cart error",
+    });
   }
 };

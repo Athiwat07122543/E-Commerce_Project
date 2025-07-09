@@ -48,9 +48,6 @@ const ChangeAddress = ({ getClose }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(changeAddress);
-  }, [changeAddress]);
 
   return (
     <div className="fixed inset-0 flex justify-center items-center backdrop-blur-md z-50 rounded-2xl">

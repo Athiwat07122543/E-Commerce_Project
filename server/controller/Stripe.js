@@ -98,9 +98,14 @@ exports.checkOut = async (req, res) => {
         })
       )
     );
-    res.json({ sessionId: session.id, url: session.url });
+    res.status(200).json({ sessionId: session.id, url: session.url });
   } catch (err) {
     console.log(err);
+    return res.status(500).json({
+      success: false,
+      error: "CHECK_OUT_ERROR",
+      message: "Check out error",
+    });
   }
 };
 

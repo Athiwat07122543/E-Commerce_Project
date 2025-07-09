@@ -18,7 +18,6 @@ const Payment = () => {
   const [popupChangeAddress, setPopupChangeAddress] = useState(false);
   const [address, setAddress] = useState([]);
   const cart = useStore((state) => state.cart);
-
   const listAddress = async () => {
     const res = await getAddress(token);
     res?.data.map((item) => {

@@ -19,7 +19,7 @@ exports.listUser = async (req, res) => {
     console.log(err);
     res
       .status(500)
-      .json({ error: "LIST_USER_ERROR", message: "ListUser ทำงานผิดพลาด" });
+      .json({ error: "LIST_USER_ERROR", message: "List user ทำงานผิดพลาด" });
   }
 };
 
@@ -37,9 +37,12 @@ exports.editUser = async (req, res) => {
         enabled: enabled,
       },
     });
-    res.send(data);
+    res.status(200).json(data);
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .json({ error: "EDIT_USER_ERROR", message: "Edit user ทำงานผิดพลาด" });
   }
 };
 exports.updateStock = async (req, res) => {
@@ -72,9 +75,15 @@ exports.updateStock = async (req, res) => {
         },
       });
     }
-    res.send("work1");
+    res.status(200).json(cart);
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .json({
+        error: "UPDATE_STOCK_ERROR",
+        message: "Update stock ทำงานผิดพลาด",
+      });
   }
 };
 
@@ -115,9 +124,12 @@ exports.getOrder = async (req, res) => {
 
     const totalPages = Math.ceil(totalOrders / limit);
 
-    res.json({ orders, totalPages });
+    res.status(200).json({ orders, totalPages });
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .json({ error: "GET_ORDER_ERROR", message: "Get order ทำงานผิดพลาด" });
   }
 };
 
@@ -150,9 +162,16 @@ exports.getOrderBy = async (req, res) => {
       },
     });
 
-    res.json(order);
+    res.status(200).json(order);
   } catch (err) {
     console.log(err);
+
+    res
+      .status(500)
+      .json({
+        error: "GET_ORDER_BY_ERROR",
+        message: "Get order by ทำงานผิดพลาด",
+      });
   }
 };
 
@@ -179,9 +198,15 @@ exports.updateOrder = async (req, res) => {
       },
     });
 
-    res.json({ message: "ok" });
+    res.status(200).json(updateOrder);
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .json({
+        error: "UPDATE_ORDER_ERROR",
+        message: "Update order ทำงานผิดพลาด",
+      });
   }
 };
 
@@ -199,9 +224,15 @@ exports.ordersToDay = async (req, res) => {
       },
     });
 
-    res.json(orders);
+    res.status(200).json(orders);
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .json({
+        error: "ORDER_TO_DAY_ERROR",
+        message: "order to day ทำงานผิดพลาด",
+      });
   }
 };
 
@@ -224,9 +255,15 @@ exports.totalSalesToDay = async (req, res) => {
       0
     );
 
-    res.json(totalPrice);
+    res.status(200).json(totalPrice);
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .json({
+        error: "TOTAL_SALES_TO_DAY_ERROR",
+        message: "Total sales to day ทำงานผิดพลาด",
+      });
   }
 };
 
@@ -258,11 +295,17 @@ exports.ordersMonthlySales = async (req, res) => {
       monthlySales[month - 1] += order.totalPrice;
     });
 
-    res.json({
+    res.status(200).json({
       labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
       data: monthlySales,
     });
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .json({
+        error: "ORDERS_MONTHLY_SALES",
+        message: "Orders monthly sales ทำงานผิดพลาด",
+      });
   }
 };
